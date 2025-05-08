@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  react:
+    build:
+      context: ./React/dept-sales-frontend # Ruta a tu proyecto React
+    ports:
+      - "3000:3000"
+    networks:
+      - app_network
+
+  django:
+    build:
+      context: ./Django # Ruta a tu proyecto Django
+    ports:
+      - "8000:8000"
+    depends_on:
+      - react # Django depende de React
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    external: true
